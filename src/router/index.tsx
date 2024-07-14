@@ -13,7 +13,7 @@ const Router: React.FC = () => {
         <Route
           path='/entrar'
           element={
-            <AuthLayout>
+            <AuthLayout title='Acesse seus restaurantes prediletos'>
               <SignIn />
             </AuthLayout>
           }
@@ -21,7 +21,7 @@ const Router: React.FC = () => {
         <Route
           path='/cadastro'
           element={
-            <AuthLayout>
+            <AuthLayout title='Cadastre-se'>
               <SignUp />
             </AuthLayout>
           }

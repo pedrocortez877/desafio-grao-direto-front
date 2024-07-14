@@ -1,10 +1,15 @@
 import { ReactNode } from 'react';
 import { Container, Title } from './AuthLayout.styles';
 
-const AuthLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+type AuthLayoutProps = {
+  title: string;
+  children: ReactNode;
+};
+
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title }) => {
   return (
     <Container>
-      <Title>Acesse seus restaurantes prediletos</Title>
+      <Title>{title}</Title>
       {children}
     </Container>
   );

@@ -20,7 +20,7 @@ type ResponseError = {
   statusCode: number;
 };
 
-export const useAuth = () => {
+export const useSignIn = () => {
   const { setToken: setAuthToken, clearToken } = useAuthStore();
 
   const loginMutation = useMutation<

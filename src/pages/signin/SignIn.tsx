@@ -16,13 +16,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import schema from './SignIn.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAuth } from '@hooks/useAuth';
+import { useSignIn } from '@hooks/useSignIn';
 
 type FormInput = yup.InferType<typeof schema>;
 
 const SignIn: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { login, isLoading } = useAuth();
+  const { login, isLoading } = useSignIn();
   const {
     register,
     handleSubmit,
