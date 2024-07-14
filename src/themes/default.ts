@@ -4,6 +4,7 @@ export const defaultTheme = {
     white: '#fff',
     primary: '#f63757',
     gray: '#f9f9f9',
+    darkGray: '#333',
   },
   fonts: {
     default: 'Nunito, sans-serif',
@@ -39,5 +40,6 @@ export const defaultTheme = {
     medium: '16px',
     large: '24px',
     xl: '32px',
+    xxl: '48px',
   },
 };

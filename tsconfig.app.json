@@ -36,7 +36,9 @@
 			"@containers/*": ["containers/*"],
 			"@stores/*": ["stores/*"],
 			"@assets/*": ["assets/*"],
-			"@schemas/*": ["schemas/*"]
+			"@schemas/*": ["schemas/*"],
+			"@global/*": ["global/*"],
+      "@layouts/*": ["layouts/*"]
 		},
 		"typeRoots": ["./node_modules/@types", "./src/@types"]
   },

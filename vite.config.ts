@@ -22,6 +22,8 @@ export default defineConfig(({ mode }) => {
         '@hooks': path.resolve(__dirname, './src/hooks'),
         '@schemas': path.resolve(__dirname, './src/schemas'),
         '@stores': path.resolve(__dirname, './src/stores'),
+        '@global': path.resolve(__dirname, './src/global'),
+        '@layouts': path.resolve(__dirname, './src/layouts'),
       },
     },
     base: env.VITE_BASE_URL || '/',
