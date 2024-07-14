@@ -21,7 +21,24 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Custom paths and types */
+		"baseUrl": "./src",
+		"paths": {
+			"@components/*": ["components/*"],
+			"@pages/*": ["pages/*"],
+			"@themes/*": ["themes/*"],
+			"@types/*": ["@types/*"],
+			"@utils/*": ["utils/*"],
+			"@hooks/*": ["hooks/*"],
+			"@services/*": ["services/*"],
+			"@containers/*": ["containers/*"],
+			"@stores/*": ["stores/*"],
+			"@assets/*": ["assets/*"],
+			"@schemas/*": ["schemas/*"]
+		},
+		"typeRoots": ["./node_modules/@types", "./src/@types"]
   },
   "include": ["src"]
 }
