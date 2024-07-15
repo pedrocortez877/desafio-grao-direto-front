@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
         '@stores': path.resolve(__dirname, './src/stores'),
         '@global': path.resolve(__dirname, './src/global'),
         '@layouts': path.resolve(__dirname, './src/layouts'),
+        '@features': path.resolve(__dirname, './src/features'),
       },
     },
     base: env.VITE_BASE_URL || '/',

@@ -38,7 +38,8 @@
 			"@assets/*": ["assets/*"],
 			"@schemas/*": ["schemas/*"],
 			"@global/*": ["global/*"],
-      "@layouts/*": ["layouts/*"]
+      "@layouts/*": ["layouts/*"],
+      "@features/*": ["features/*"],
 		},
 		"typeRoots": ["./node_modules/@types", "./src/@types"]
   },
