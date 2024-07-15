@@ -1,3 +1,5 @@
+import { Product } from '@features/product/types';
+
 export type Restaurant = {
   id: string;
   name: string;
@@ -5,13 +7,13 @@ export type Restaurant = {
   rating: number;
   timeToDelivery: string;
   deliveryPrice: number;
+  menus?: Menu[];
 };
 
-export type CardRestaurantProps = {
-  restaurant: Restaurant;
-};
-
-export type RestaurantState = {
-  isVisibleSearchInput: boolean;
-  setIsVisibleSearchInput: () => void;
+export type Menu = {
+  id: string;
+  name: string;
+  description: number;
+  restaurantId: string;
+  products?: Product[];
 };

@@ -55,8 +55,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: 96px 0px;
-  padding: ${({ theme }) => `0 ${theme.spacing.medium}`};
+  margin: 88px 0px;
 `;
 
 export const Footer = styled.div`
@@ -64,12 +63,18 @@ export const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 768px;
   position: fixed;
   bottom: 0;
   padding: ${({ theme }) => `${theme.spacing.medium} ${theme.spacing.xxl}`};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   background-color: ${({ theme }) => theme.colors.white};
   z-index: 2;
+
+  @media (min-width: 768px) {
+    border-radius: ${({ theme }) => theme.borderRadius.medium};
+    bottom: ${({ theme }) => theme.spacing.large};
+  }
 `;
 
 export const FooterItem = styled.button`

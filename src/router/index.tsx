@@ -5,6 +5,7 @@ import AuthLayout from '@features/auth/layouts/auth-layout';
 import SignIn from '@features/auth/pages/sign-in';
 import SignUp from '@features/auth/pages/sign-up';
 import MainRestaurantLayout from '@features/restaurant/layouts/MainRestaurantLayout';
+import RestaurantDetails from '@features/restaurant/pages/RestaurantDetails';
 
 const Router: React.FC = () => {
   return (
@@ -16,6 +17,15 @@ const Router: React.FC = () => {
             element={
               <MainRestaurantLayout>
                 <RestaurantsList />
+              </MainRestaurantLayout>
+            }
+          />
+
+          <Route
+            path='/restaurantes/:id'
+            element={
+              <MainRestaurantLayout>
+                <RestaurantDetails />
               </MainRestaurantLayout>
             }
           />

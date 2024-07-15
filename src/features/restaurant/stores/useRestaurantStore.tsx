@@ -1,5 +1,9 @@
 import { create } from 'zustand';
-import { RestaurantState } from '../types';
+
+type RestaurantState = {
+  isVisibleSearchInput: boolean;
+  setIsVisibleSearchInput: () => void;
+};
 
 export const useRestaurantStore = create<RestaurantState>((set) => ({
   isVisibleSearchInput: false,

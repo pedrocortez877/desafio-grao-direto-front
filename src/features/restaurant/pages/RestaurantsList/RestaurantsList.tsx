@@ -1,20 +1,21 @@
 import CardRestaurant from '@features/restaurant/components/CardRestaurant';
-import { Container } from './RestaurantsList.styles';
+import { Container, ListContainer } from './RestaurantsList.styles';
 import Spinner from '@global/components/Spinner';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSearchRestaurants } from '@features/restaurant/hooks/useSearchRestaurant';
 import debounce from 'lodash.debounce';
 import InputSearch from '@features/restaurant/components/InputSearch';
 import { useRestaurantStore } from '@features/restaurant/stores/useRestaurantStore';
+import { useNavigate } from 'react-router-dom';
 
 const Restaurant: React.FC = () => {
   const [query, setQuery] = useState<string>('');
   const [debouncedQuery, setDebouncedQuery] = useState<string>('');
+  const navigate = useNavigate();
   const { isVisibleSearchInput } = useRestaurantStore();
   const { data: restaurants, isLoading } = useSearchRestaurants(debouncedQuery);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('🚀 ~ handleInputChange ~ e.target.value:', e.target.value);
     setQuery(e.target.value);
   };
 
@@ -29,13 +30,19 @@ const Restaurant: React.FC = () => {
 
   return (
     <Container>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        restaurants?.map((restaurant) => (
-          <CardRestaurant key={restaurant.id} restaurant={restaurant} />
-        ))
-      )}
+      <ListContainer>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          restaurants?.map((restaurant) => (
+            <CardRestaurant
+              key={restaurant.id}
+              restaurant={restaurant}
+              onClick={() => navigate(`/restaurantes/${restaurant.id}`)}
+            />
+          ))
+        )}
+      </ListContainer>
       <InputSearch
         hidden={isVisibleSearchInput}
         onChange={handleInputChange}

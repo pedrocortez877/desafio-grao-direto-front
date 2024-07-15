@@ -1,30 +1,32 @@
 import styled from 'styled-components';
 import backgroundImage from '@assets/images/background.webp';
 
-export const Container = styled.button`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
 `;
 
-export const Header = styled.div`
+export const LogoContainer = styled.div`
   width: 100%;
   height: 120px;
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
-  border-top-left-radius: ${({ theme }) => theme.borderRadius.medium};
-  border-top-right-radius: ${({ theme }) => theme.borderRadius.medium};
 `;
 
 export const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
   padding: ${({ theme }) => theme.spacing.medium};
   background-color: ${({ theme }) => theme.colors.white};
@@ -49,23 +51,6 @@ export const RestaurantDescription = styled.span`
   color: ${({ theme }) => theme.colors.darkGray};
 `;
 
-export const RestaurantInformationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: ${({ theme }) => theme.spacing.xxs};
-  gap: ${({ theme }) => theme.spacing.xs};
-`;
-
-export const RestaurantInformation = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  font-family: ${({ theme }) => theme.fonts.default};
-  color: ${({ theme }) => theme.colors.primary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xxs};
-`;
-
 export const RestaurantLogo = styled.img`
   width: 100px;
   height: 100px;
@@ -74,4 +59,11 @@ export const RestaurantLogo = styled.img`
   top: 50%;
   left: 64px;
   transform: translate(-50%, -50%);
+`;
+
+export const MenusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.large};
+  margin: ${({ theme }) => `${theme.spacing.large} 0`};
 `;

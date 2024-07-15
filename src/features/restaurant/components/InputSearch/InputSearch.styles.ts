@@ -5,13 +5,13 @@ export const InputContainer = styled.div`
   align-items: center;
   padding: ${({ theme }) => `0px ${theme.spacing.medium}`};
   width: calc(100% - 32px);
+  max-width: 768px;
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   background-color: ${({ theme }) => theme.colors.gray};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
   position: fixed;
   bottom: ${({ hidden }) => (hidden ? '96px' : '-100px')};
   transition: bottom 0.3s;
-  align-self: center;
 `;
 
 export const Input = styled.input`

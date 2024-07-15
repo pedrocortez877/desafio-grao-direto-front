@@ -12,11 +12,19 @@ import {
 import { MdAccessTime } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
 import RestaurantLogoImage from '@assets/images/restaurant-logo.webp';
-import { CardRestaurantProps } from '@features/restaurant/types';
+import { Restaurant } from '@features/restaurant/types';
+import { ButtonHTMLAttributes } from 'react';
 
-const CardRestaurant: React.FC<CardRestaurantProps> = ({ restaurant }) => {
+type CardRestaurantProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  restaurant: Restaurant;
+};
+
+const CardRestaurant: React.FC<CardRestaurantProps> = ({
+  restaurant,
+  ...props
+}) => {
   return (
-    <Container>
+    <Container {...props}>
       <Header />
       <DescriptionContainer>
         <RestaurantName>{restaurant.name}</RestaurantName>
