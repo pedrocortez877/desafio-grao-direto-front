@@ -5,7 +5,8 @@ import { useAuthStore } from '@features/auth/stores/useAuthStore';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { LoginCredentials, ResponseError, TokenObject } from '../types';
+import { LoginCredentials, TokenObject } from '../types';
+import { ResponseError } from '@global/types';
 
 export const useSignIn = () => {
   const { setToken: setAuthToken, clearToken } = useAuthStore();

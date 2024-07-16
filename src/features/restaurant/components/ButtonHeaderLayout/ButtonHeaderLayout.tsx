@@ -12,7 +12,7 @@ const ButtonHeaderLayout: React.FC<{ location: string }> = ({ location }) => {
     if (location === '/') {
       logout();
     } else {
-      navigate('/');
+      navigate(-1);
     }
   };
   return (

@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-type RestaurantState = {
+type GlobalState = {
   isVisibleSearchInput: boolean;
   setIsVisibleSearchInput: () => void;
 };
 
-export const useRestaurantStore = create<RestaurantState>((set) => ({
+export const useGlobalStore = create<GlobalState>((set) => ({
   isVisibleSearchInput: false,
   setIsVisibleSearchInput: () =>
     set((state) => ({ isVisibleSearchInput: !state.isVisibleSearchInput })),

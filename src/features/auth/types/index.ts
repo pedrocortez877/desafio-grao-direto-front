@@ -18,12 +18,6 @@ export type TokenObject = {
   access_token: string;
 };
 
-export type ResponseError = {
-  error: string;
-  message: string;
-  statusCode: number;
-};
-
 export type SignInFormInputProps = yup.InferType<typeof signInSchema>;
 
 export type SignUpFormInputProps = yup.InferType<typeof signUpSchema>;

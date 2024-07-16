@@ -1,19 +1,18 @@
-import CardRestaurant from '@features/restaurant/components/CardRestaurant';
-import { Container, ListContainer } from './RestaurantsList.styles';
-import Spinner from '@features/auth/components/Spinner';
+import { Container } from './RestaurantsList.styles';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useSearchRestaurants } from '@features/restaurant/hooks/useSearchRestaurant';
+import { useSearchRestaurants } from '@features/restaurant/hooks/useSearchRestaurants';
+import { useGlobalStore } from '@global/store/useGlobalStore';
 import debounce from 'lodash.debounce';
 import InputSearch from '@features/restaurant/components/InputSearch';
-import { useRestaurantStore } from '@features/restaurant/stores/useRestaurantStore';
+import ListContainer from '@global/containers/ListRestaurantsContainer';
 import { useNavigate } from 'react-router-dom';
 
 const Restaurant: React.FC = () => {
   const [query, setQuery] = useState<string>('');
   const [debouncedQuery, setDebouncedQuery] = useState<string>('');
-  const navigate = useNavigate();
-  const { isVisibleSearchInput } = useRestaurantStore();
+  const { isVisibleSearchInput } = useGlobalStore();
   const { data: restaurants, isLoading } = useSearchRestaurants(debouncedQuery);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -30,19 +29,13 @@ const Restaurant: React.FC = () => {
 
   return (
     <Container>
-      <ListContainer>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          restaurants?.map((restaurant) => (
-            <CardRestaurant
-              key={restaurant.id}
-              restaurant={restaurant}
-              onClick={() => navigate(`/restaurantes/${restaurant.id}`)}
-            />
-          ))
-        )}
-      </ListContainer>
+      <ListContainer
+        isLoading={isLoading}
+        restaurants={restaurants}
+        onRestaurantClick={(restaurant) =>
+          navigate(`/restaurantes/${restaurant.id}`)
+        }
+      />
       <InputSearch
         hidden={isVisibleSearchInput}
         onChange={handleInputChange}

@@ -4,17 +4,19 @@ import RestaurantsList from '@features/restaurant/pages/RestaurantsList';
 import AuthLayout from '@features/auth/layouts/auth-layout';
 import SignIn from '@features/auth/pages/sign-in';
 import SignUp from '@features/auth/pages/sign-up';
-import MainRestaurantLayout from '@features/restaurant/layouts/MainRestaurantLayout';
+import MainLayout from '@global/layouts/MainLayout';
 import RestaurantDetails from '@features/restaurant/pages/RestaurantDetails';
+import Favorites from '@features/favorites/pages/Favorites';
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route element={<MainRestaurantLayout />}>
+          <Route element={<MainLayout />}>
             <Route path='/' element={<RestaurantsList />} />
             <Route path='/restaurantes/:id' element={<RestaurantDetails />} />
+            <Route path='/favoritos' element={<Favorites />} />
           </Route>
         </Route>
 

@@ -10,7 +10,6 @@ import {
 } from './CardProduct.styles';
 
 const CardProduct: React.FC<{ product: Product }> = ({ product }) => {
-  console.log('🚀 ~ product:', product);
   return (
     <Container>
       <ImageContainer imageUrl={product.imageUrl} />

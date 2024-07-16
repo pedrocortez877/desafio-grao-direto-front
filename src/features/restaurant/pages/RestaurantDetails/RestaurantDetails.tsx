@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import RestaurantLogoImage from '@assets/images/restaurant-logo.webp';
 import {
+  ButtonFavorite,
   Container,
   DescriptionContainer,
   Header,
@@ -12,17 +13,30 @@ import {
 } from './RestaurantDetails.styles';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import RestaurantService from '../../services';
-import { useQuery } from '@tanstack/react-query';
 import MenuContainer from '@features/restaurant/containers/MenuContainer';
+import { FaRegStar, FaStar } from 'react-icons/fa';
+import { useGetRestaurant } from '@features/restaurant/hooks/useGetRestaurant';
+import {
+  useAddFavorite,
+  useIsFavorite,
+  useRemoveFavorite,
+} from '@features/favorites/hooks/useFavorites';
 
 const RestaurantDetails: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: restaurant, isLoading } = useQuery({
-    queryKey: ['getRestaurantById', id],
-    queryFn: () => RestaurantService.asyncGetRestaurantById(id),
-  });
+  const isFavorite = useIsFavorite(id);
+  const { data: restaurant, isLoading } = useGetRestaurant(id);
+  const { mutate: addFavorite } = useAddFavorite();
+  const { mutate: removeFavorite } = useRemoveFavorite();
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      removeFavorite({ restaurantId: id });
+    } else {
+      addFavorite({ restaurantId: id });
+    }
+  };
 
   useEffect(() => {
     if (!id) {
@@ -46,6 +60,13 @@ const RestaurantDetails: React.FC = () => {
             {restaurant?.description}
           </RestaurantDescription>
         </DescriptionContainer>
+        <ButtonFavorite onClick={handleFavoriteClick}>
+          {isFavorite ? (
+            <FaStar color='#DAA520' size={24} />
+          ) : (
+            <FaRegStar color='gray' size={24} />
+          )}
+        </ButtonFavorite>
         <RestaurantLogo src={RestaurantLogoImage} alt='Logo do restaurante' />
       </Header>
       <MenusContainer>

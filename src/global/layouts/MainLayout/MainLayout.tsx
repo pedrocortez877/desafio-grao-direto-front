@@ -8,18 +8,18 @@ import {
   HeaderAddressText,
   HeaderInformations,
   HeaderPersonName,
-} from './MainRestaurantLayout.styles';
+} from './MainLayout.styles';
 import { IoMdHome } from 'react-icons/io';
-import { IoLocation, IoPersonCircleOutline } from 'react-icons/io5';
-import { LuTicket } from 'react-icons/lu';
-import { FaSearch } from 'react-icons/fa';
-import { useRestaurantStore } from '@features/restaurant/stores/useRestaurantStore';
-import { Outlet, useLocation } from 'react-router-dom';
+import { IoLocation } from 'react-icons/io5';
+import { FaRegStar, FaSearch } from 'react-icons/fa';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import ButtonHeaderLayout from '@features/restaurant/components/ButtonHeaderLayout/ButtonHeaderLayout';
+import { useGlobalStore } from '@global/store/useGlobalStore';
 
 const MainRestaurantLayout: React.FC = () => {
-  const { setIsVisibleSearchInput } = useRestaurantStore();
+  const { setIsVisibleSearchInput } = useGlobalStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -39,17 +39,14 @@ const MainRestaurantLayout: React.FC = () => {
         <Outlet />
       </Content>
       <Footer>
-        <FooterItem>
+        <FooterItem onClick={() => navigate('/')}>
           <IoMdHome size={24} />
         </FooterItem>
-        <FooterItem>
-          <LuTicket size={24} />
+        <FooterItem onClick={() => navigate('/favoritos')}>
+          <FaRegStar size={24} />
         </FooterItem>
         <FooterItem onClick={setIsVisibleSearchInput}>
           <FaSearch size={20} />
-        </FooterItem>
-        <FooterItem>
-          <IoPersonCircleOutline size={24} />
         </FooterItem>
       </Footer>
     </Container>

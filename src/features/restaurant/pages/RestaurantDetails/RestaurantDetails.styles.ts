@@ -75,3 +75,14 @@ export const MenusContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.large};
   margin: ${({ theme }) => `${theme.spacing.large} 0`};
 `;
+
+export const ButtonFavorite = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  top: 148px;
+  right: 16px;
+  cursor: pointer;
+`;
