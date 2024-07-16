@@ -1,6 +1,4 @@
-import { ReactNode } from 'react';
 import {
-  ButtonMenu,
   Container,
   Content,
   Footer,
@@ -11,22 +9,22 @@ import {
   HeaderInformations,
   HeaderPersonName,
 } from './MainRestaurantLayout.styles';
-import { IoMdHome, IoMdMenu } from 'react-icons/io';
+import { IoMdHome } from 'react-icons/io';
 import { IoLocation, IoPersonCircleOutline } from 'react-icons/io5';
 import { LuTicket } from 'react-icons/lu';
 import { FaSearch } from 'react-icons/fa';
 import { useRestaurantStore } from '@features/restaurant/stores/useRestaurantStore';
+import { Outlet, useLocation } from 'react-router-dom';
+import ButtonHeaderLayout from '@features/restaurant/components/ButtonHeaderLayout/ButtonHeaderLayout';
 
-const MainRestaurantLayout: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+const MainRestaurantLayout: React.FC = () => {
   const { setIsVisibleSearchInput } = useRestaurantStore();
+  const location = useLocation();
+
   return (
     <Container>
       <Header>
-        <ButtonMenu>
-          <IoMdMenu size={24} />
-        </ButtonMenu>
+        <ButtonHeaderLayout location={location.pathname} />
         <HeaderInformations>
           <HeaderPersonName>
             Olá! Fred, você está nesse endereço?
@@ -37,7 +35,9 @@ const MainRestaurantLayout: React.FC<{ children: ReactNode }> = ({
           </HeaderAddressContainer>
         </HeaderInformations>
       </Header>
-      <Content>{children}</Content>
+      <Content>
+        <Outlet />
+      </Content>
       <Footer>
         <FooterItem>
           <IoMdHome size={24} />

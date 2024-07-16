@@ -9,11 +9,11 @@ import {
   FormContainerTitle,
   PasswordInputContainer,
 } from './SignUp.styles';
-import Input from '@global/components/Input';
+import Input from '@features/auth/components/Input';
 import { IoMdEye, IoMdEyeOff, IoMdSend } from 'react-icons/io';
 import { signUpSchema } from '@features/auth/schemas';
 import { SignUpFormInputProps } from '@features/auth/types';
-import InputContainer from '@global/containers/InputContainer';
+import InputContainer from '@features/auth/containers/InputContainer';
 
 const SignUp: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);

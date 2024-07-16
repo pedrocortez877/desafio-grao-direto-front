@@ -1,5 +1,5 @@
-import Input from '@global/components/Input';
-import InputContainer from '@global/containers/InputContainer';
+import Input from '@features/auth/components/Input';
+import InputContainer from '@features/auth/containers/InputContainer';
 import { useEffect, useState } from 'react';
 import { IoMdEye, IoMdEyeOff, IoMdSend } from 'react-icons/io';
 import { useForm } from 'react-hook-form';

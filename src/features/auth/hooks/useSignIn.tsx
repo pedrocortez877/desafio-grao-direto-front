@@ -33,6 +33,7 @@ export const useSignIn = () => {
   const logout = async () => {
     clearToken();
     await storage.remove(StorageKey.TOKEN);
+    navigate('/entrar');
   };
 
   return {

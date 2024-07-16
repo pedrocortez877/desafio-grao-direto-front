@@ -1,6 +1,6 @@
 import CardRestaurant from '@features/restaurant/components/CardRestaurant';
 import { Container, ListContainer } from './RestaurantsList.styles';
-import Spinner from '@global/components/Spinner';
+import Spinner from '@features/auth/components/Spinner';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSearchRestaurants } from '@features/restaurant/hooks/useSearchRestaurant';
 import debounce from 'lodash.debounce';

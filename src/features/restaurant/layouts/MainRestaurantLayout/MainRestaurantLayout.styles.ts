@@ -20,12 +20,6 @@ export const Header = styled.div`
   z-index: 1;
 `;
 
-export const ButtonMenu = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
 export const HeaderInformations = styled.div`
   display: flex;
   flex-direction: column;

@@ -12,23 +12,10 @@ const Router: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route
-            path='/'
-            element={
-              <MainRestaurantLayout>
-                <RestaurantsList />
-              </MainRestaurantLayout>
-            }
-          />
-
-          <Route
-            path='/restaurantes/:id'
-            element={
-              <MainRestaurantLayout>
-                <RestaurantDetails />
-              </MainRestaurantLayout>
-            }
-          />
+          <Route element={<MainRestaurantLayout />}>
+            <Route path='/' element={<RestaurantsList />} />
+            <Route path='/restaurantes/:id' element={<RestaurantDetails />} />
+          </Route>
         </Route>
 
         {/* AUTH ROUTES */}

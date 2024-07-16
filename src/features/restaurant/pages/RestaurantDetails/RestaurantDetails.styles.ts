@@ -21,6 +21,10 @@ export const LogoContainer = styled.div`
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
+
+  @media (min-width: 768px) {
+    height: 240px;
+  }
 `;
 
 export const DescriptionContainer = styled.div`
@@ -59,6 +63,10 @@ export const RestaurantLogo = styled.img`
   top: 50%;
   left: 64px;
   transform: translate(-50%, -50%);
+
+  @media (min-width: 768px) {
+    top: 70%;
+  }
 `;
 
 export const MenusContainer = styled.div`
