@@ -1,16 +1,10 @@
-import axiosInstance from '@global/services/axiosInstance';
+import AuthService from '../services';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ResponseError } from '@global/types';
-
-type SignUpCredentials = {
-  name: string;
-  lastName: string;
-  email: string;
-  password: string;
-};
+import { SignUpCredentials } from '../types';
 
 export const useSignUp = () => {
   const navigate = useNavigate();
@@ -21,7 +15,7 @@ export const useSignUp = () => {
     SignUpCredentials
   >({
     mutationFn: async (variables: SignUpCredentials) => {
-      await axiosInstance.post('/auth/sign-up', variables);
+      await AuthService.signUp(variables);
     },
     onSuccess: () => {
       toast.success('Cadastro realizado com sucesso!');

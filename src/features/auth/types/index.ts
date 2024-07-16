@@ -3,6 +3,13 @@ export type LoginCredentials = {
   password: string;
 };
 
+export type SignUpCredentials = {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
+
 export type TokenObject = {
   access_token: string;
 };
