@@ -10,8 +10,38 @@
 
 ## Instalação
 
+1. Clone este repositório
+
 ```sh
 pnpm install
+```
+
+https://github.com/pedrocortez877/desafio-grao-direto-front.git
+
+2. Navegue até o diretório do projeto
+
+```sh
+cd desafio-grao-direto-front
+```
+
+3. Instale as dependências
+
+Com PNPM
+
+```sh
+pnpm install
+```
+
+Com NPM
+
+```sh
+npm install
+```
+
+Com Yarn
+
+```sh
+yarn
 ```
 
 ## Autor
