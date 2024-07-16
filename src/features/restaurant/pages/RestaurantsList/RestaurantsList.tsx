@@ -1,11 +1,11 @@
-import { Container } from './RestaurantsList.styles';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useSearchRestaurants } from '@features/restaurant/hooks/useSearchRestaurants';
-import { useGlobalStore } from '@global/store/useGlobalStore';
 import debounce from 'lodash.debounce';
 import InputSearch from '@features/restaurant/components/InputSearch';
 import ListContainer from '@global/containers/ListRestaurantsContainer';
+import { Container } from './RestaurantsList.styles';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useGlobalStore } from '@global/store/useGlobalStore';
 import { useNavigate } from 'react-router-dom';
+import { useSearchRestaurants } from '@features/restaurant/hooks/useRestaurant';
 
 const Restaurant: React.FC = () => {
   const [query, setQuery] = useState<string>('');

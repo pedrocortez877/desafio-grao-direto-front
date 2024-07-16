@@ -3,17 +3,13 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ResponseError } from '@global/types';
 
 type SignUpCredentials = {
   name: string;
   lastName: string;
   email: string;
   password: string;
-};
-type ResponseError = {
-  error: string;
-  message: string;
-  statusCode: number;
 };
 
 export const useSignUp = () => {

@@ -9,17 +9,26 @@ import {
   HeaderInformations,
   HeaderPersonName,
 } from './MainLayout.styles';
-import { IoMdHome } from 'react-icons/io';
-import { IoLocation } from 'react-icons/io5';
-import { FaRegStar, FaSearch } from 'react-icons/fa';
+import { IoHome, IoHomeOutline, IoLocation } from 'react-icons/io5';
+import { FaRegStar, FaSearch, FaStar } from 'react-icons/fa';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import ButtonHeaderLayout from '@features/restaurant/components/ButtonHeaderLayout/ButtonHeaderLayout';
 import { useGlobalStore } from '@global/store/useGlobalStore';
+import { useAuthStore } from '@features/auth/stores/useAuthStore';
 
 const MainRestaurantLayout: React.FC = () => {
   const { setIsVisibleSearchInput } = useGlobalStore();
+  const { firstName } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleClickSearchInput = () => {
+    if (location.pathname !== '/') {
+      return;
+    }
+
+    setIsVisibleSearchInput();
+  };
 
   return (
     <Container>
@@ -27,7 +36,7 @@ const MainRestaurantLayout: React.FC = () => {
         <ButtonHeaderLayout location={location.pathname} />
         <HeaderInformations>
           <HeaderPersonName>
-            Olá! Fred, você está nesse endereço?
+            Olá! {firstName}, você está nesse endereço?
           </HeaderPersonName>
           <HeaderAddressContainer>
             <IoLocation color='#f63757' />
@@ -40,12 +49,23 @@ const MainRestaurantLayout: React.FC = () => {
       </Content>
       <Footer>
         <FooterItem onClick={() => navigate('/')}>
-          <IoMdHome size={24} />
+          {location.pathname === '/' ? (
+            <IoHome size={24} />
+          ) : (
+            <IoHomeOutline size={24} />
+          )}
         </FooterItem>
         <FooterItem onClick={() => navigate('/favoritos')}>
-          <FaRegStar size={24} />
+          {location.pathname === '/favoritos' ? (
+            <FaStar size={24} />
+          ) : (
+            <FaRegStar size={24} />
+          )}
         </FooterItem>
-        <FooterItem onClick={setIsVisibleSearchInput}>
+        <FooterItem
+          onClick={handleClickSearchInput}
+          disabled={location.pathname !== '/'}
+        >
           <FaSearch size={20} />
         </FooterItem>
       </Footer>

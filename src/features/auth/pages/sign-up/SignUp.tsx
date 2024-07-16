@@ -1,22 +1,18 @@
-import { useState } from 'react';
+import * as yup from 'yup';
+import InputContainer from '@global/containers/InputContainer';
+import Input from '@global/components/Input';
+import PasswordInput from '@features/auth/containers/PasswordInput';
+import ButtonSubmit from '@features/auth/components/ButtonSubmit';
+import FormFooterLink from '@features/auth/components/FormFooterLink';
+import FormContainer from '@features/auth/containers/FormContainer';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSignUp } from '@features/auth/hooks/useSignUp';
-import {
-  ButtonSubmit,
-  ButtonViewPassword,
-  FormContainer,
-  FormContainerTitle,
-  PasswordInputContainer,
-} from './SignUp.styles';
-import Input from '@features/auth/components/Input';
-import { IoMdEye, IoMdEyeOff, IoMdSend } from 'react-icons/io';
 import { signUpSchema } from '@features/auth/schemas';
-import { SignUpFormInputProps } from '@features/auth/types';
-import InputContainer from '@features/auth/containers/InputContainer';
+
+export type SignUpFormInputProps = yup.InferType<typeof signUpSchema>;
 
 const SignUp: React.FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { signUp, isLoading } = useSignUp();
   const {
     register,
@@ -32,9 +28,7 @@ const SignUp: React.FC = () => {
   });
 
   return (
-    <FormContainer onSubmit={onSubmit}>
-      <FormContainerTitle>Informe seus dados</FormContainerTitle>
-
+    <FormContainer onSubmit={onSubmit} title='Informe os seus dados'>
       <InputContainer
         label='Nome'
         labelHtmlFor='name'
@@ -80,58 +74,27 @@ const SignUp: React.FC = () => {
         />
       </InputContainer>
 
-      <InputContainer
-        label='Senha'
-        labelHtmlFor='password'
+      <PasswordInput<SignUpFormInputProps>
+        register={register}
         error={!!errors.password}
         errorMessage={errors.password?.message}
-      >
-        <PasswordInputContainer>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            id='password'
-            placeholder='senha'
-            aria-invalid={!!errors.password}
-            {...register('password')}
-          />
-          <ButtonViewPassword
-            onClick={() => setShowPassword((prevState) => !prevState)}
-            type='button'
-            aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-          >
-            {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-          </ButtonViewPassword>
-        </PasswordInputContainer>
-      </InputContainer>
+        field='password'
+      />
 
-      <InputContainer
-        label='Confirmar senha'
-        labelHtmlFor='confirmPassword'
+      <PasswordInput<SignUpFormInputProps>
+        register={register}
         error={!!errors.confirmPassword}
         errorMessage={errors.confirmPassword?.message}
-      >
-        <PasswordInputContainer>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            id='confirmPassword'
-            placeholder='senha'
-            aria-invalid={!!errors.confirmPassword}
-            {...register('confirmPassword')}
-          />
-          <ButtonViewPassword
-            onClick={() => setShowPassword((prevState) => !prevState)}
-            type='button'
-            aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-          >
-            {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-          </ButtonViewPassword>
-        </PasswordInputContainer>
-      </InputContainer>
+        field='confirmPassword'
+      />
 
-      <ButtonSubmit type='submit' disabled={isLoading}>
-        <IoMdSend />
-        {isLoading ? 'Carregando...' : 'Entrar'}
-      </ButtonSubmit>
+      <ButtonSubmit isLoading={isLoading} text='Cadastrar' />
+
+      <FormFooterLink
+        helpText='Já possui uma conta?'
+        linkHref='/entrar'
+        linkText='Entrar'
+      />
     </FormContainer>
   );
 };

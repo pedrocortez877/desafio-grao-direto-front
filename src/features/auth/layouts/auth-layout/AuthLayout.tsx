@@ -1,5 +1,10 @@
-import { AuthLayoutProps } from '@features/auth/types';
+import { ReactNode } from 'react';
 import { Container, Title } from './AuthLayout.styles';
+
+export type AuthLayoutProps = {
+  title: string;
+  children: ReactNode;
+};
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title }) => {
   return (

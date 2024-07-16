@@ -85,4 +85,8 @@ export const ButtonFavorite = styled.button`
   top: 148px;
   right: 16px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    top: 272px;
+  }
 `;

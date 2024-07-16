@@ -1,30 +1,20 @@
-import Input from '@features/auth/components/Input';
-import InputContainer from '@features/auth/containers/InputContainer';
-import { useEffect, useState } from 'react';
-import { IoMdEye, IoMdEyeOff, IoMdSend } from 'react-icons/io';
+import * as yup from 'yup';
+import Input from '@global/components/Input';
+import InputContainer from '@global/containers/InputContainer';
+import useAuthRedirect from '@features/auth/hooks/useAuthRedirect';
+import PasswordInput from '@features/auth/containers/PasswordInput';
+import ButtonSubmit from '@features/auth/components/ButtonSubmit';
+import FormFooterLink from '@features/auth/components/FormFooterLink';
+import FormContainer from '@features/auth/containers/FormContainer';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '@features/auth/stores/useAuthStore';
 import { useSignIn } from '@features/auth/hooks/useSignIn';
-import { SignInFormInputProps } from '@features/auth/types';
 import { signInSchema } from '@features/auth/schemas';
-import {
-  ButtonSubmit,
-  ButtonViewPassword,
-  FormContainer,
-  FormContainerTitle,
-  PasswordInputContainer,
-  SignUpContainer,
-  SignUpLink,
-  SignUpText,
-} from './SignIn.styles';
+
+export type SignInFormInputProps = yup.InferType<typeof signInSchema>;
 
 const SignIn: React.FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { login, isLoading } = useSignIn();
-  const { token } = useAuthStore();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -38,16 +28,10 @@ const SignIn: React.FC = () => {
     login(data);
   });
 
-  useEffect(() => {
-    if (token) {
-      navigate('/');
-    }
-  }, [token, navigate]);
+  useAuthRedirect();
 
   return (
-    <FormContainer onSubmit={onSubmit}>
-      <FormContainerTitle>Entre com suas credenciais</FormContainerTitle>
-
+    <FormContainer onSubmit={onSubmit} title='Entre com as suas credenciais'>
       <InputContainer
         label='E-mail'
         labelHtmlFor='email'
@@ -63,39 +47,20 @@ const SignIn: React.FC = () => {
         />
       </InputContainer>
 
-      <InputContainer
-        label='Senha'
-        labelHtmlFor='password'
+      <PasswordInput<SignInFormInputProps>
+        register={register}
         error={!!errors.password}
         errorMessage={errors.password?.message}
-      >
-        <PasswordInputContainer>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            id='password'
-            placeholder='senha'
-            aria-invalid={!!errors.password}
-            {...register('password')}
-          />
-          <ButtonViewPassword
-            onClick={() => setShowPassword((prevState) => !prevState)}
-            type='button'
-            aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-          >
-            {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-          </ButtonViewPassword>
-        </PasswordInputContainer>
-      </InputContainer>
+        field='password'
+      />
 
-      <ButtonSubmit type='submit' disabled={isLoading}>
-        <IoMdSend />
-        {isLoading ? 'Carregando...' : 'Entrar'}
-      </ButtonSubmit>
+      <ButtonSubmit isLoading={isLoading} text='Entrar' />
 
-      <SignUpContainer>
-        <SignUpText>Não tem uma conta?</SignUpText>
-        <SignUpLink href='/cadastro'>Cadastre-se</SignUpLink>
-      </SignUpContainer>
+      <FormFooterLink
+        helpText='Ainda não possui uma conta?'
+        linkHref='/cadastro'
+        linkText='Cadastre-se'
+      />
     </FormContainer>
   );
 };
