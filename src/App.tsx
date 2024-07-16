@@ -10,11 +10,11 @@ import { useEffect } from 'react';
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
-  const initializeToken = useAuthStore((state) => state.initializeToken);
+  const initializeSession = useAuthStore((state) => state.initializeSession);
 
   useEffect(() => {
-    initializeToken();
-  }, [initializeToken]);
+    initializeSession();
+  }, [initializeSession]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

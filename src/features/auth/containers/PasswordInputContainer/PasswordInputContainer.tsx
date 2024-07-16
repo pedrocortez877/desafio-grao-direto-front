@@ -2,25 +2,22 @@ import { useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import Input from '@global/components/Input';
 import InputContainer from '@global/containers/InputContainer';
-import {
-  ButtonViewPassword,
-  PasswordInputContainer,
-} from './PasswordInput.styles';
+import { ButtonViewPassword, Container } from './PasswordInputContainer.styles';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
-type PasswordInputProps<T extends FieldValues> = {
+type PasswordInputContainerProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
   error: boolean;
   errorMessage: string | undefined;
   field: Path<T>;
 };
 
-const PasswordInput = <T extends FieldValues>({
+const PasswordInputContainer = <T extends FieldValues>({
   register,
   error,
   errorMessage,
   field,
-}: PasswordInputProps<T>) => {
+}: PasswordInputContainerProps<T>) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -30,7 +27,7 @@ const PasswordInput = <T extends FieldValues>({
       error={error}
       errorMessage={errorMessage}
     >
-      <PasswordInputContainer>
+      <Container>
         <Input
           type={showPassword ? 'text' : 'password'}
           id={field}
@@ -45,9 +42,9 @@ const PasswordInput = <T extends FieldValues>({
         >
           {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
         </ButtonViewPassword>
-      </PasswordInputContainer>
+      </Container>
     </InputContainer>
   );
 };
 
-export default PasswordInput;
+export default PasswordInputContainer;

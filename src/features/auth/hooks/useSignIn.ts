@@ -28,10 +28,16 @@ export const useSignIn = () => {
     },
     onSuccess: async (data: TokenObject) => {
       const decoded: JwtPayload = jwtDecode(data.access_token);
-      setAuthFirstName(decoded.firstName);
-
-      setAuthToken(data.access_token);
       const stringifiedToken = JSON.stringify(data);
+
+      setAuthFirstName(decoded.firstName);
+      setAuthToken(data.access_token);
+
+      await storage.set({
+        key: StorageKey.USER_FIRST_NAME,
+        value: decoded.firstName,
+      });
+
       await storage.set({ key: StorageKey.TOKEN, value: stringifiedToken });
       navigate('/');
     },
@@ -44,6 +50,7 @@ export const useSignIn = () => {
     clearToken();
     clearFirstName();
     await storage.remove(StorageKey.TOKEN);
+    await storage.remove(StorageKey.USER_FIRST_NAME);
     navigate('/entrar');
   };
 

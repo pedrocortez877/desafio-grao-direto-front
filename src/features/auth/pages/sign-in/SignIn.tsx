@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import Input from '@global/components/Input';
 import InputContainer from '@global/containers/InputContainer';
 import useAuthRedirect from '@features/auth/hooks/useAuthRedirect';
-import PasswordInput from '@features/auth/containers/PasswordInput';
+import PasswordInput from '@features/auth/containers/PasswordInputContainer';
 import ButtonSubmit from '@features/auth/components/ButtonSubmit';
 import FormFooterLink from '@features/auth/components/FormFooterLink';
 import FormContainer from '@features/auth/containers/FormContainer';

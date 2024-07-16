@@ -9,7 +9,7 @@ export type AuthState = {
   setToken: (token: string) => void;
   clearToken: () => void;
   clearFirstName: () => void;
-  initializeToken: () => Promise<void>;
+  initializeSession: () => Promise<void>;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -19,11 +19,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   setToken: (token) => set({ token }),
   clearToken: () => set({ token: null }),
   clearFirstName: () => set({ firstName: null }),
-  initializeToken: async () => {
+  initializeSession: async () => {
     const tokenObject = await storage.get<TokenObject>(StorageKey.TOKEN);
 
     if (tokenObject) {
       set({ token: tokenObject.access_token });
+    }
+
+    const firstName = await storage.get<string>(StorageKey.USER_FIRST_NAME);
+
+    if (firstName) {
+      set({ firstName });
     }
   },
 }));

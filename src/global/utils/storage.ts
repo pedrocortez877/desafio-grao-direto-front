@@ -1,5 +1,6 @@
 export enum StorageKey {
   TOKEN = 'token',
+  USER_FIRST_NAME = 'user-first-name',
 }
 
 type SetProps = {
@@ -9,7 +10,12 @@ type SetProps = {
 
 const get = async <T>(key: StorageKey): Promise<T | null> => {
   const itemString = localStorage.getItem(key);
+
   if (!itemString) return null;
+
+  if (key === StorageKey.USER_FIRST_NAME) {
+    return itemString as T;
+  }
   return JSON.parse(itemString);
 };
 
