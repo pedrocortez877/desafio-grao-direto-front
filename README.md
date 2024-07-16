@@ -13,10 +13,8 @@
 1. Clone este repositório
 
 ```sh
-pnpm install
+git clone https://github.com/pedrocortez877/desafio-grao-direto-front.git
 ```
-
-https://github.com/pedrocortez877/desafio-grao-direto-front.git
 
 2. Navegue até o diretório do projeto
 
