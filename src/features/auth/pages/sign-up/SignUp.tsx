@@ -5,32 +5,13 @@ import PasswordInput from '@features/auth/containers/PasswordInputContainer';
 import ButtonSubmit from '@features/auth/components/ButtonSubmit';
 import FormFooterLink from '@features/auth/components/FormFooterLink';
 import FormContainer from '@features/auth/containers/FormContainer';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useSignUp } from '@features/auth/hooks/useSignUp';
 import { signUpSchema } from '@features/auth/schemas';
+import useSignUpForm from '@features/auth/hooks/useSignUpForm';
 
 export type SignUpFormInputProps = yup.InferType<typeof signUpSchema>;
 
 const SignUp: React.FC = () => {
-  const { signUp, isLoading } = useSignUp();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignUpFormInputProps>({
-    mode: 'all',
-    resolver: yupResolver<SignUpFormInputProps>(signUpSchema),
-  });
-
-  const onSubmit = handleSubmit((data) => {
-    signUp({
-      name: data.name,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-    });
-  });
+  const { onSubmit, errors, register, isLoading } = useSignUpForm();
 
   return (
     <FormContainer onSubmit={onSubmit} title='Informe os seus dados'>

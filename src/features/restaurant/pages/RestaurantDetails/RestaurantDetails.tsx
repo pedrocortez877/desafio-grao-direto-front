@@ -2,14 +2,9 @@ import MenuContainer from '@features/restaurant/containers/MenuContainer';
 import RestaurantLogoImage from '@assets/images/restaurant-logo.webp';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useRestaurantDetails } from '@features/restaurant/hooks/useRestaurant';
 import { toast } from 'react-toastify';
 import { FaRegStar, FaStar } from 'react-icons/fa';
-import { useGetRestaurant } from '@features/restaurant/hooks/useRestaurant';
-import {
-  useAddFavorite,
-  useIsFavorite,
-  useRemoveFavorite,
-} from '@features/favorites/hooks/useFavorites';
 import {
   ButtonFavorite,
   Container,
@@ -24,19 +19,9 @@ import {
 
 const RestaurantDetails: React.FC = () => {
   const { id } = useParams();
+  const { isLoading, restaurant, handleFavoriteClick, isFavorite } =
+    useRestaurantDetails(id);
   const navigate = useNavigate();
-  const isFavorite = useIsFavorite(id);
-  const { data: restaurant, isLoading } = useGetRestaurant(id);
-  const { mutate: addFavorite } = useAddFavorite();
-  const { mutate: removeFavorite } = useRemoveFavorite();
-
-  const handleFavoriteClick = () => {
-    if (isFavorite) {
-      removeFavorite({ restaurantId: id });
-    } else {
-      addFavorite({ restaurantId: id });
-    }
-  };
 
   useEffect(() => {
     if (!id) {

@@ -1,20 +1,11 @@
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { Container } from './ButtonHeaderLayout.styles';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { useSignIn } from '@features/auth/hooks/useSignIn';
+import useButtonHeaderLayout from '@features/restaurant/hooks/useButtonHeaderLayout';
 
 const ButtonHeaderLayout: React.FC<{ location: string }> = ({ location }) => {
-  const navigate = useNavigate();
-  const { logout } = useSignIn();
+  const { handleClick } = useButtonHeaderLayout({ location });
 
-  const handleClick = () => {
-    if (location === '/') {
-      logout();
-    } else {
-      navigate(-1);
-    }
-  };
   return (
     <Container onClick={handleClick}>
       {location === '/' ? (

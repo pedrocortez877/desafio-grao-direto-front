@@ -66,3 +66,22 @@ export const useIsFavorite = (restaurantId?: string) => {
   const { data: favorites } = useFavorites();
   return favorites?.some((favorite) => favorite.restaurantId === restaurantId);
 };
+
+export const useFavoriteManagement = (restaurantId?: string) => {
+  const isFavorite = useIsFavorite(restaurantId);
+  const { mutate: addFavorite } = useAddFavorite();
+  const { mutate: removeFavorite } = useRemoveFavorite();
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      removeFavorite({ restaurantId });
+    } else {
+      addFavorite({ restaurantId });
+    }
+  };
+
+  return {
+    isFavorite,
+    handleFavoriteClick,
+  };
+};

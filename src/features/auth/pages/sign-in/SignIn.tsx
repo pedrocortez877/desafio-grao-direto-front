@@ -6,27 +6,13 @@ import PasswordInput from '@features/auth/containers/PasswordInputContainer';
 import ButtonSubmit from '@features/auth/components/ButtonSubmit';
 import FormFooterLink from '@features/auth/components/FormFooterLink';
 import FormContainer from '@features/auth/containers/FormContainer';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useSignIn } from '@features/auth/hooks/useSignIn';
+import useSignInForm from '@features/auth/hooks/useSignInForm';
 import { signInSchema } from '@features/auth/schemas';
 
 export type SignInFormInputProps = yup.InferType<typeof signInSchema>;
 
 const SignIn: React.FC = () => {
-  const { login, isLoading } = useSignIn();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignInFormInputProps>({
-    mode: 'all',
-    resolver: yupResolver<SignInFormInputProps>(signInSchema),
-  });
-
-  const onSubmit = handleSubmit((data) => {
-    login(data);
-  });
+  const { onSubmit, errors, isLoading, register } = useSignInForm();
 
   useAuthRedirect();
 
